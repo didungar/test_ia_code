@@ -1,39 +1,42 @@
 <?php
 // src/AppBundle/Controller/CalculatorController.php
-
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\Calculator;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Route("/calculator")
- */
-class CalculatorController extends Controller
+class CalculatorController
 {
     /**
-     * @Route("/multiply", name="multiply")
+     * @Route("/calculate", name="calculate")
      */
-    public function multiplyAction(Request $request)
+    public function calculateAction(Request $request)
     {
-        // Get the numbers from the request parameters
-        $num1 = $request->query->get('num1');
-        $num2 = $request->query->get('num2');
+        // Récupérer les données de la requête HTTP
+        $operation = $request->query->get('operation');
+        $number1 = $request->query->get('number1');
+        $number2 = $request->query->get('number2');
 
-        // Check if both numbers are positive
-        if ($num1 < 0 || $num2 < 0) {
-            throw new \InvalidArgumentException('Only positive numbers are allowed.');
+        // Effectuer l'opération arithmétique
+        switch ($operation) {
+            case 'add':
+                $result = $number1 + $number2;
+                break;
+            case 'subtract':
+                $result = $number1 - $number2;
+                break;
+            case 'multiply':
+                $result = $number1 * $number2;
+                break;
+            case 'divide':
+                $result = $number1 / $number2;
+                break;
+            default:
+                throw new \Exception('Invalid operation');
         }
 
-        // Use the calculator service to multiply the numbers
-        $calculator = $this->get('app.calculator');
-        $result = $calculator->multiply($num1, $num2);
-
-        return $this->render('AppBundle:Calculator:index.html.twig', [
-            'result' => $result,
-            'num1' => $num1,
-            'num2' => $num2,
-        ]);
+        // Afficher le résultat entier
+        return new Response($result);
     }
 }

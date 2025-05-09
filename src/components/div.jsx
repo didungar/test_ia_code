@@ -1,34 +1,23 @@
 import React, { useState } from 'react';
 
-function PositiveDivision() {
-  const [numerator, setNumerator] = useState(0);
-  const [denominator, setDenominator] = useState(1);
-  const [result, setResult] = useState(null);
+const NumberInput = () => {
+  const [value, setValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  function handleNumeratorChange(event) {
-    setNumerator(parseInt(event.target.value));
-  }
-
-  function handleDenominatorChange(event) {
-    setDenominator(parseInt(event.target.value));
-  }
-
-  function handleClick() {
-    const result = numerator / denominator;
-    setResult(result);
-  }
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (value > 100) {
+      setErrorMessage('The number you entered is too large!');
+    } else {
+      setValue(value);
+      setErrorMessage('');
+    }
+  };
 
   return (
     <div>
-      <h1>Positive Division</h1>
-      <p>Numerator:</p>
-      <input type="number" value={numerator} onChange={handleNumeratorChange} />
-      <p>Denominator:</p>
-      <input type="number" value={denominator} onChange={handleDenominatorChange} />
-      <button onClick={handleClick}>Divide</button>
-      {result !== null && (
-        <div>Result: {result}</div>
-      )}
+      <input type="number" value={value} onChange={handleChange} />
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
-}
+};

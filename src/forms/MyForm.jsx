@@ -1,41 +1,32 @@
 import React, { useState } from 'react';
 
-function ZeroDivision() {
-  const [numerator, setNumerator] = useState(0);
-  const [denominator, setDenominator] = useState(1);
+function SubtractNumbers() {
+  const [number1, setNumber1] = useState(0);
+  const [number2, setNumber2] = useState(0);
   const [result, setResult] = useState(0);
 
-  function handleNumeratorChange(event) {
-    const newValue = parseInt(event.target.value, 10);
-    setNumerator(newValue);
-  }
-
-  function handleDenominatorChange(event) {
-    const newValue = parseInt(event.target.value, 10);
-    setDenominator(newValue);
-  }
-
-  function handleDivide() {
-    if (denominator === 0) {
-      alert("Cannot divide by zero!");
-      return;
-    }
-    setResult(numerator / denominator);
+  function handleSubmit(event) {
+    event.preventDefault();
+    setResult(number1 - number2);
   }
 
   return (
     <div>
-      <h1>Zero Division Test</h1>
-      <form>
-        <label>Numerator: </label>
-        <input type="number" value={numerator} onChange={handleNumeratorChange} />
+      <h1>Soustraction des deux nombres</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Number 1:
+          <input type="text" value={number1} onChange={(event) => setNumber1(parseInt(event.target.value))} />
+        </label>
         <br />
-        <label>Denominator: </label>
-        <input type="number" value={denominator} onChange={handleDenominatorChange} />
+        <label>
+          Number 2:
+          <input type="text" value={number2} onChange={(event) => setNumber2(parseInt(event.target.value))} />
+        </label>
         <br />
-        <button onClick={handleDivide}>Divide</button>
-        <p>Result: {result}</p>
+        <button type="submit">Soustraire</button>
       </form>
+      <p>Le résultat est: {result}</p>
     </div>
   );
 }

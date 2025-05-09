@@ -1,0 +1,15 @@
+<div>
+  <h1>Entrée incorrecte</h1>
+  <form>
+    <label for="name">Nom : </label>
+    <input type="text" id="name" value={this.state.name} onChange={this.handleNameChange} />
+    <br />
+    <label for="age">Age : </label>
+    <input type="number" id="age" value={this.state.age} onChange={this.handleAgeChange} />
+    <br />
+    <button type="submit">Envoyer</button>
+  </form>
+  {this.state.error && (
+    <div className="alert alert-danger">{this.state.error}</div>
+  )}
+</div>

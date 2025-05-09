@@ -2,24 +2,22 @@
 // src/AppBundle/Controller/DefaultController.php
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function handleZeroDivisionAction(Request $request)
+    /**
+     * @Route("/decimals", name="decimals")
+     */
+    public function decimalsAction()
     {
-        // Get the number to divide by from the request
-        $number = (int)$request->query->get('number');
+        $number = 12345.6789;
 
-        // Check if the number is not zero
-        if ($number === 0) {
-            return new Response('Cannot divide by zero', 400);
-        }
+        // Display the number with two decimal places
+        $response = new Response();
+        $response->setContent(number_format($number, 2));
 
-        // Divide by the number and return the result
-        $result = 12 / $number;
-
-        return new Response($result, 200);
+        return $response;
     }
 }
