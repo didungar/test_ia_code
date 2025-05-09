@@ -1,42 +1,33 @@
 <?php
 // src/AppBundle/Controller/CalculatorController.php
+
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Number;
 
-class CalculatorController
+class CalculatorController extends Controller
 {
     /**
-     * @Route("/calculate", name="calculate")
+     * @Route("/multiply", name="multiply")
      */
-    public function calculateAction(Request $request)
+    public function multiplyAction(Request $request)
     {
-        // Récupérer les données de la requête HTTP
-        $operation = $request->query->get('operation');
-        $number1 = $request->query->get('number1');
-        $number2 = $request->query->get('number2');
+        // Extraction des paramètres de la requête
+        $firstNumber = intval($request->query->get('firstNumber'));
+        $secondNumber = intval($request->query->get('secondNumber'));
 
-        // Effectuer l'opération arithmétique
-        switch ($operation) {
-            case 'add':
-                $result = $number1 + $number2;
-                break;
-            case 'subtract':
-                $result = $number1 - $number2;
-                break;
-            case 'multiply':
-                $result = $number1 * $number2;
-                break;
-            case 'divide':
-                $result = $number1 / $number2;
-                break;
-            default:
-                throw new \Exception('Invalid operation');
-        }
+        // Création d'un objet Number pour stocker le résultat de la multiplication
+        $result = new Number();
 
-        // Afficher le résultat entier
-        return new Response($result);
+        // Appel de la méthode multiply() pour calculer le produit des nombres
+        $result->multiply($firstNumber, $secondNumber);
+
+        // Enregistrement du résultat dans une variable
+        $product = $result->getResult();
+
+        // Création d'une réponse HTTP avec le résultat de la multiplication
+        return new Response(json_encode(['product' => $product]));
     }
 }

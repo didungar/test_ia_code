@@ -1,23 +1,42 @@
 import React, { useState } from 'react';
 
-const NumberInput = () => {
-  const [value, setValue] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+class Stack extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [],
+      currentItem: null
+    };
+  }
 
-  const handleChange = (event) => {
-    const { value } = event.target;
-    if (value > 100) {
-      setErrorMessage('The number you entered is too large!');
-    } else {
-      setValue(value);
-      setErrorMessage('');
+  handlePush = (item) => {
+    const newItems = [...this.state.items];
+    newItems.push(item);
+    this.setState({ items: newItems, currentItem: item });
+  }
+
+  handlePop = () => {
+    if (this.state.currentItem !== null) {
+      const newCurrentItem = this.state.items[this.state.items.length - 1];
+      this.setState({ items: this.state.items.slice(0, -1), currentItem: newCurrentItem });
     }
-  };
+  }
 
-  return (
-    <div>
-      <input type="number" value={value} onChange={handleChange} />
-      {errorMessage && <p>{errorMessage}</p>}
-    </div>
-  );
-};
+  handleReset = () => {
+    this.setState({ items: [], currentItem: null });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Stack</h2>
+        <button onClick={this.handlePush}>Push</button>
+        <button onClick={this.handlePop}>Pop</button>
+        <button onClick={this.handleReset}>Reset</button>
+        {this.state.currentItem !== null && (
+          <div>Current item: {this.state.currentItem}</div>
+        )}
+      </div>
+    );
+  }
+}

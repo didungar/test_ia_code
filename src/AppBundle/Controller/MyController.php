@@ -8,18 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class MyController extends Controller
 {
     /**
-     * @Route("/subtraction", name="subtraction")
+     * @Route("/test")
      */
-    public function subtractionAction(Request $request)
+    public function testAction(Request $request)
     {
-        // Get the inputs from the request
-        $a = $request->get('a');
-        $b = $request->get('b');
+        // Créer une instance de la classe Calculatrice
+        $calculatrice = new Calculatrice();
 
-        // Perform the subtraction
-        $result = $a - $b;
+        // Effectuer l'opération simple
+        $resultat = $calculatrice->additionner(2, 3);
 
-        // Return the result as a JSON response
-        return new JsonResponse(['result' => $result]);
+        // Afficher le résultat
+        return new Response($resultat);
     }
 }

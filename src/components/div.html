@@ -1,1 +1,19 @@
-<div id="root"></div>
+import React, { useState } from 'react';
+
+function SimpleOperation() {
+  const [result, setResult] = useState(0);
+
+  const handleClick = () => {
+    setResult(5 + 3); // Exemple de résultat : 8
+  };
+
+  return (
+    <div>
+      <h1>Opération simple</h1>
+      <p>Le résultat est : {result}</p>
+      <button onClick={handleClick}>Afficher le résultat</button>
+    </div>
+  );
+}
+
+export default SimpleOperation;

@@ -1,24 +1,33 @@
 <?php
 // src/Controller/DefaultController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(Request $request)
+    public function indexAction(Request $request): Response
     {
-        // Mise en production du code pour afficher la liste des utilisateurs
-        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
-
+        // Handle the "index" case
         return $this->render('default/index.html.twig', [
-            'users' => $users,
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request): Response
+    {
+        // Handle the "about" case
+        return $this->render('default/about.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
 }

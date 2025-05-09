@@ -4,33 +4,90 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use App\Service\Calculator;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CalculatorController extends AbstractController
 {
     /**
      * @Route("/calculator", name="calculator")
      */
-    public function index(Request $request)
+    public function calculator(Request $request)
     {
-        // Création d'une instance de la classe Calculator
-        $calculator = new Calculator();
+        // Initialize the stack
+        $stack = [];
 
-        // Récupération des données entrées par l'utilisateur
-        $number1 = $request->get('number1');
-        $number2 = $request->get('number2');
-        $operation = $request->get('operation');
-
-        // Validation du résultat du calcul
-        if ($calculator->validateResult($number1, $number2, $operation)) {
-            // Si le résultat est valide, on affiche un message de succès
-            $this->addFlash('success', 'Le résultat du calcul est valide.');
-        } else {
-            // Sinon, on affiche un message d'erreur
-            $this->addFlash('error', 'Le résultat du calcul n\'est pas valide.');
+        // Add the first number to the stack
+        if ($request->query->get('num1') !== null) {
+            $stack[] = (int) $request->query->get('num1');
         }
 
-        return new Response();
+        // Perform the operation based on the button pressed
+        switch ($request->query->get('operator')) {
+            case '+':
+                // Addition
+                if ($request->query->get('num2') !== null) {
+                    $stack[] = (int) $request->query->get('num2');
+                } else {
+                    throw new \InvalidArgumentException('Missing second number for addition');
+                }
+                break;
+            case '-':
+                // Subtraction
+                if ($request->query->get('num2') !== null) {
+                    $stack[] = -(int) $request->query->get('num2');
+                } else {
+                    throw new \InvalidArgumentException('Missing second number for subtraction');
+                }
+                break;
+            case '*':
+                // Multiplication
+                if ($request->query->get('num2') !== null) {
+                    $stack[] = (int) $request->query->get('num1') * (int) $request->query->get('num2');
+                } else {
+                    throw new \InvalidArgumentException('Missing second number for multiplication');
+                }
+                break;
+            case '/':
+                // Division
+                if ($request->query->get('num2') !== null) {
+                    $stack[] = (int) $request->query->get('num1') / (int) $request->query->get('num2');
+                } else {
+                    throw new \InvalidArgumentException('Missing second number for division');
+                }
+                break;
+            default:
+                // Unsupported operator
+                throw new \InvalidArgumentException(sprintf('Unsupported operator "%s"', $request->query->get('operator')));
+        }
+
+        // Update the stack based on the button pressed
+        switch ($request->query->get('button')) {
+            case '=':
+                // Calculate the result and update the stack
+                if (count($stack) === 2) {
+                    $result = array_sum($stack);
+                    $stack = [$result];
+                } else {
+                    throw new \InvalidArgumentException('Invalid number of operands');
+                }
+                break;
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                // Add the next number to the stack
+                if ($request->query->get('num2') !== null) {
+                    $stack[] = (int) $request->query->get('num2');
+                } else {
+                    throw new \InvalidArgumentException('Missing second number for operation');
+                }
+                break;
+            default:
+                // Unsupported button
+                throw new \InvalidArgumentException(sprintf('Unsupported button "%s"', $request->query->get('button')));
+        }
+
+        // Return the updated stack as JSON
+        return $this->json($stack, 200);
     }
 }
