@@ -1,0 +1,32 @@
+import React, { useState } from 'react';
+
+function Calculator() {
+  const [firstNumber, setFirstNumber] = useState(null);
+  const [secondNumber, setSecondNumber] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const handleFirstNumberChange = (e) => {
+    setFirstNumber(parseInt(e.target.value));
+  };
+
+  const handleSecondNumberChange = (e) => {
+    setSecondNumber(parseInt(e.target.value));
+  };
+
+  const handleResultClick = () => {
+    if (firstNumber && secondNumber) {
+      setResult((firstNumber * secondNumber).toString());
+    }
+  };
+
+  return (
+    <div>
+      <input type="number" value={firstNumber} onChange={handleFirstNumberChange} />
+      +
+      <input type="number" value={secondNumber} onChange={handleSecondNumberChange} />
+      =
+      {result && <span>{result}</span>}
+      <button onClick={handleResultClick}>Calculer</button>
+    </div>
+  );
+}
