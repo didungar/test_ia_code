@@ -1,33 +1,26 @@
 <?php
-// src/Controller/MyController.php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class MyController extends AbstractController
 {
-    public function index(Request $request)
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        // Initialisation de la pile
-        $stack = array();
-        
-        // Gestion du formulaire
-        if ($request->isMethod('post')) {
-            $formData = $request->get('form');
-            
-            // Si l'utilisateur a appuyé sur la touche "C", réinitialiser la pile
-            if (isset($formData['key']) && $formData['key'] === 'c') {
-                $stack = array();
-            } else {
-                // Sinon, ajouter l'élément à la pile
-                array_push($stack, $formData['value']);
-            }
-        }
-        
-        // Affichage de la pile
-        return $this->render('index.html.twig', [
-            'stack' => $stack,
+        $this->entityManager = $entityManager;
+    }
+
+    public function myAction()
+    {
+        // Récupération du résultat de la requête SQL
+        $result = $this->entityManager->getRepository('App:MyEntity')->findAll();
+
+        return $this->render('my/template.html.twig', [
+            'result' => $result
         ]);
     }
 }

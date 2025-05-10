@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function SimpleOperation() {
-  const [result, setResult] = useState(0);
+function MyComponent() {
+  const [data, setData] = useState(null);
 
-  const handleClick = () => {
-    setResult(5 + 3); // Exemple de résultat : 8
-  };
+  useEffect(() => {
+    fetch('https://api.example.com/data')
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <div>
-      <h1>Opération simple</h1>
-      <p>Le résultat est : {result}</p>
-      <button onClick={handleClick}>Afficher le résultat</button>
+      {data && <p>{data}</p>}
     </div>
   );
 }
-
-export default SimpleOperation;
