@@ -1,0 +1,83 @@
+/* Importation du fichier de police d'écriture */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+/* Variables pour les couleurs et la taille de police */
+$couleur-primaire: #2196F3;
+$couleur-secondaire: #FF5722;
+$taille-police: 1.5em;
+
+/* Style du composant */
+.soustraction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $couleur-primaire;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $taille-police;
+}
+
+/* Style des boutons */
+.soustraction button {
+  background-color: $couleur-primaire;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: $taille-police;
+  cursor: pointer;
+}
+
+/* Style des boutons de soustraction */
+.soustraction button[type="minus"] {
+  background-color: $couleur-secondaire;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: $taille-police;
+  cursor: pointer;
+}
+
+/* Style de l'entête du composant */
+.soustraction header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $couleur-primaire;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $taille-police;
+}
+
+/* Style du corps du composant */
+.soustraction section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $couleur-secondaire;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $taille-police;
+}
+
+/* Style du pied de page du composant */
+.soustraction footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: $couleur-primaire;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $taille-police;
+}
