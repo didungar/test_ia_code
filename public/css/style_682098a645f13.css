@@ -1,0 +1,46 @@
+/* Variables globales */
+:root {
+  --main-color: #333; /* Couleur principale */
+  --accent-color: #999; /* Couleur secondaire */
+  --font-family: Arial, sans-serif; /* Famille de polices utilisée */
+}
+
+/* Style de base pour tous les éléments du composant */
+.base {
+  font-family: var(--font-family);
+  color: var(--main-color);
+}
+
+/* Styles spécifiques pour le résultat de la multiplication */
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  color: var(--accent-color);
+}
+
+/* Styles spécifiques pour les éléments de l'interface utilisateur */
+.input-field {
+  width: 100%;
+  height: 50px;
+  font-size: 24px;
+  padding: 10px;
+  border: 1px solid var(--accent-color);
+}
+
+.button {
+  display: inline-block;
+  width: 50%;
+  height: 50px;
+  font-size: 24px;
+  padding: 10px;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(90%);
+}
