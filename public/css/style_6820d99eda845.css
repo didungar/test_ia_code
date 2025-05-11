@@ -1,0 +1,60 @@
+/* Import du fichier de police de caractère */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+
+/* Variables globales pour la police de caractère, la couleur et la taille du texte */
+:root {
+  --font-family: 'Open Sans', sans-serif;
+  --color: #333;
+  --text-size: 16px;
+}
+
+/* Classe de base pour le composant */
+.modern-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 50%;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  font-family: var(--font-family);
+}
+
+/* Classe pour le titre */
+.modern-component__title {
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-size);
+  color: var(--color);
+}
+
+/* Classe pour les éléments de contenu */
+.modern-component__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+/* Classe pour les boutons */
+.modern-component__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 200px;
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  font-size: var(--text-size);
+  margin: 1rem;
+}
