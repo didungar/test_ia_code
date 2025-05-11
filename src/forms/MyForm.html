@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+
+function Calculator() {
+  const [result, setResult] = useState(0);
+
+  const handleClick = () => {
+    // Update result state with the calculated value
+    setResult(calculate());
+  };
+
+  return (
+    <div>
+      <h1>Calculator</h1>
+      <form onSubmit={handleClick}>
+        <label htmlFor="numberOne">Number one:</label>
+        <input type="text" id="numberOne" name="numberOne" />
+        <br />
+        <label htmlFor="numberTwo">Number two:</label>
+        <input type="text" id="numberTwo" name="numberTwo" />
+        <br />
+        <button type="submit">Calculate</button>
+      </form>
+      <p>Result: {result}</p>
+    </div>
+  );
+}
+
+function calculate() {
+  // Perform calculation and return result
+  const numberOne = parseInt(document.getElementById('numberOne').value);
+  const numberTwo = parseInt(document.getElementById('numberTwo').value);
+  const result = numberOne + numberTwo;
+  return result;
+}
