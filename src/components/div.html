@@ -1,0 +1,16 @@
+<div className="container">
+  <h1>Addition and Subtraction</h1>
+  <div className="row">
+    <div className="col-6">
+      <label htmlFor="num1">Number 1: </label>
+      <input type="number" id="num1" value={this.state.num1} onChange={(e) => this.setState({ num1: e.target.value })} />
+    </div>
+    <div className="col-6">
+      <label htmlFor="num2">Number 2: </label>
+      <input type="number" id="num2" value={this.state.num2} onChange={(e) => this.setState({ num2: e.target.value })} />
+    </div>
+  </div>
+  <button className="btn btn-primary" onClick={() => this.addNumbers()}>Add</button>
+  <button className="btn btn-secondary" onClick={() => this.subtractNumbers()}>Subtract</button>
+  <p>{this.state.result}</p>
+</div>
