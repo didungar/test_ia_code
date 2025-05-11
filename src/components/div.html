@@ -1,0 +1,26 @@
+import React, { useState } from 'react';
+
+function InputWithErrorMessage() {
+  const [decimalCount, setDecimalCount] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    if (!value.match(/^\d*\.\d*$/)) {
+      setDecimalCount(0);
+      setErrorMessage('Invalid number of decimals');
+      return;
+    }
+
+    setDecimalCount(value.split('.')[1].length || 0);
+    setErrorMessage('');
+  };
+
+  return (
+    <div>
+      <label htmlFor="input">Input:</label>
+      <input type="text" id="input" value={decimalCount} onChange={handleChange} />
+      {errorMessage && <p>{errorMessage}</p>}
+    </div>
+  );
+}
