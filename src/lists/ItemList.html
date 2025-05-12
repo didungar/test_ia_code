@@ -1,0 +1,32 @@
+// HistoryView.js
+import React from 'react';
+
+class HistoryView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      operations: [] // initialize an empty array to store the history of operations
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://example.com/operations')
+      .then(response => response.json())
+      .then(data => this.setState({ operations: data }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>History of Operations</h1>
+        <ul>
+          {this.state.operations.map((operation, index) => (
+            <li key={index}>{operation.name} ({operation.date})</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default HistoryView;

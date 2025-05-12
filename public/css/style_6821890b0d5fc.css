@@ -1,0 +1,65 @@
+/* displayResult.css */
+
+:root {
+  --primary-color: #3498db; /* couleur primaire */
+  --secondary-color: #f1c40f; /* couleur secondaire */
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.result-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.result-container .icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+.result-container .icon:before {
+  content: '🔥';
+}
+
+.result-container .title {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.result-container .subtitle {
+  display: block;
+  margin-top: 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.result-container .value {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.result-container .value.negative {
+  color: #dc3545;
+}
