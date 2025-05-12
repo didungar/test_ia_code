@@ -1,0 +1,71 @@
+// Index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// App.js
+import React, { useState } from 'react';
+import './index.css';
+
+function App() {
+  const [data, setData] = useState([]);
+
+  // Function to fetch data from API and update state
+  const fetchData = async () => {
+    try {
+      const response = await fetch('[[FILE]]');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Function to handle search bar input change event
+  const handleSearchChange = (event) => {
+    const { value } = event.target;
+    setSearchQuery(value);
+  };
+
+  // State for search query
+  const [searchQuery, setSearchQuery] = useState('');
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>React Weather App</p>
+        <input type="text" value={searchQuery} onChange={handleSearchChange} />
+        <button onClick={fetchData}>Fetch Data</button>
+      </header>
+      {/* Display weather data in a table */}
+      <table>
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Temperature (°C)</th>
+            <th>Humidity (%)</th>
+            <th>Pressure (hPa)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr key={item.name}>
+              <td>{item.name}</td>
+              <td>{item.main.temp}°C</td>
+              <td>{item.main.humidity}%</td>
+              <td>{item.main.pressure}hPa</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
