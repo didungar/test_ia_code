@@ -1,0 +1,18 @@
+javascript
+import React, { useState } from 'react';
+
+const ErrorDisplay = () => {
+  const [errors, setErrors] = useState([]);
+
+  const handleError = (error) => {
+    setErrors((prevErrors) => [...prevErrors, error]);
+  };
+
+  return (
+    <div className="error-display">
+      {errors.map((error) => (
+        <p key={error.message}>{error.message}</p>
+      ))}
+    </div>
+  );
+};
