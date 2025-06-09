@@ -1,0 +1,67 @@
+/* terms_and_conditions_readability.css */
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #0b396d;
+  text-decoration: underline;
+}
+
+.terms-and-conditions {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.terms-and-conditions h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.terms-and-conditions p {
+  margin-bottom: 1em;
+}
+
+.terms-and-conditions ul, .terms-and-conditions ol {
+  padding-left: 20px;
+}
+
+.terms-and-conditions li {
+  margin-bottom: 0.5em;
+}
+
+.terms-and-conditions a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+.terms-and-conditions a:hover, .terms-and-conditions a:focus {
+  color: #0b396d;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .terms-and-conditions {
+    max-width: 1200px;
+  }
+}

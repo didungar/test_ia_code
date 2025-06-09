@@ -1,0 +1,16 @@
+<!-- views/FormView.php -->
+<div class="form-container">
+  <h2>Inscription</h2>
+  <form onSubmit={handleSubmit}>
+    <label for="firstName">Prénom</label>
+    <input type="text" name="firstName" id="firstName" value={values.firstName} onChange={(e) => handleChange(e)} />
+    <br />
+    <label for="lastName">Nom</label>
+    <input type="text" name="lastName" id="lastName" value={values.lastName} onChange={(e) => handleChange(e)} />
+    <br />
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value={values.email} onChange={(e) => handleChange(e)} />
+    <br />
+    <button type="submit">Envoyer</button>
+  </form>
+</div>
