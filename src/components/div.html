@@ -1,0 +1,24 @@
+import React, { useState } from 'react';
+import PDFViewer from './PDFViewer';
+
+function TermsAndConditionsLink() {
+  const [termsAndConditionsURL, setTermsAndConditionsURL] = useState(null);
+
+  const handleClick = () => {
+    fetch('/terms-and-conditions.pdf')
+      .then((response) => response.blob())
+      .then((data) => {
+        const url = URL.createObjectURL(new Blob([data], { type: 'application/pdf' }));
+        setTermsAndConditionsURL(url);
+      });
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Afficher les termes et conditions</button>
+      {termsAndConditionsURL && (
+        <PDFViewer url={termsAndConditionsURL} />
+      )}
+    </div>
+  );
+}

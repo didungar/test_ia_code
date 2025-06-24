@@ -1,0 +1,64 @@
+<template>
+  <div class="game-page">
+    <h1>Game Page</h1>
+    <div class="scores">
+      <p>Scores:</p>
+      <ul>
+        <li v-for="(score, index) in scores" :key="index">{{ score.name }}: {{ score.value }}</li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import { onMounted, ref, watch } from 'vue';
+import axios from 'axios';
+
+export default {
+  setup() {
+    const scores = ref([]);
+
+    onMounted(() => {
+      getScores();
+    });
+
+    watch(scores, () => {
+      updateUI();
+    });
+
+    function getScores() {
+      axios.get('/api/scores')
+        .then((response) => {
+          scores.value = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    function updateUI() {
+      // Update the UI with the new scores
+    }
+
+    return {
+      scores,
+    };
+  },
+};
+</script>
+
+<style scoped>
+.game-page {
+  text-align: center;
+}
+
+.scores {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+</style>
